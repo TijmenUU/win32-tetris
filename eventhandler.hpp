@@ -19,17 +19,19 @@ private:
 	std::unordered_set<PlayerActions> playerActionReleases;
 	bool didWindowResize;
 
+	friend class Core;
 	void ClearState();
-
-public:
 	void Update();
 
+	EventHandler();
+	~EventHandler();
+
+public:
 	bool DidWindowResize() const;
 	bool WasThereAnyAction() const;
 	bool WasActionPressed(PlayerActions const action) const;
 	bool WasActionReleased(PlayerActions const action) const;
 
-	EventHandler();
-	~EventHandler();
+	static EventHandler & GetInstance();
 };
 

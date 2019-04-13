@@ -108,6 +108,12 @@ bool EventHandler::WasActionReleased(PlayerActions const action) const
 	return true;
 }
 
+EventHandler & EventHandler::GetInstance()
+{
+	static EventHandler evHandler;
+	return evHandler;
+}
+
 EventHandler::EventHandler()
 	: didWindowResize(false)
 {
