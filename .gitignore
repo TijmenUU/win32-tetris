@@ -1,0 +1,11 @@
+# Ignore IDE stuff
+.vs/
+.vscode/
+*.vcxproj.user
+
+# Ignore build stuff
+[Dd]ebug/
+[Rr]elease/
+*.pdb
+*.o
+*.obj
