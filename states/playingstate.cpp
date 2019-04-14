@@ -5,9 +5,7 @@
 #include "../statemanager.hpp"
 #include "playingstate.hpp"
 #include "pausestate.hpp"
-#include "windowsizestate.hpp"
 
-COORD const minWindowSize{ 40, 30 };
 COORD const playingFieldPosition{ 1, 1 };
 COORD const playingFieldSize{ 28, 28 };
 COORD const scorePosition{ playingFieldPosition.X + playingFieldSize.X + 2, 2 };
@@ -15,20 +13,6 @@ COORD const scorePosition{ playingFieldPosition.X + playingFieldSize.X + 2, 2 };
 COORD GetMessageCoordinate()
 {
 	return COORD({playingFieldPosition.X, playingFieldPosition.Y + (playingFieldSize.Y / 2)});
-}
-
-bool PlayingState::CheckWindowSize()
-{
-	auto const window = Window::GetActiveViewportSize();
-	auto const windowSize = window.bottomRight - window.topLeft;
-	if (windowSize.X < minWindowSize.X || windowSize.Y < minWindowSize.Y)
-	{
-		StateManager & const stManager = StateManager::GetInstance();
-		stManager.PushState(std::make_unique<WindowSizeState>(COORD{ 0, 0 }, windowSize.X, minWindowSize));
-		return false;
-	}
-
-	return true;
 }
 
 void PlayingState::Pause()
@@ -93,6 +77,7 @@ void PlayingState::DrawStatics() const
 
 void PlayingState::DrawDynamics() const
 {
+	field.Draw();
 }
 
 void PlayingState::Update(unsigned const elapsedMs)
@@ -100,25 +85,20 @@ void PlayingState::Update(unsigned const elapsedMs)
 	DrawDynamics();
 
 	EventHandler& evHandler = EventHandler::GetInstance();
-	if (evHandler.DidWindowResize())
-	{
-		CheckWindowSize();
-	}
 	if (evHandler.WasThereAnyAction())
 	{
 		HandleInput(evHandler);
 	}
+	field.Update(elapsedMs);
 }
 
 void PlayingState::Awake()
 {
-	if (CheckWindowSize())
-	{
-		DrawStatics();
-	}
+	DrawStatics();
 }
 
 PlayingState::PlayingState()
+	: field(playingFieldPosition, playingFieldSize)
 {
 }
 

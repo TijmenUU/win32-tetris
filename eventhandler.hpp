@@ -5,6 +5,8 @@ enum class PlayerActions
 {
 	Escape,
 	MoveDown,
+	MoveLeft,
+	MoveRight,
 	RotateLeft,
 	RotateRight,
 	Pause,

@@ -51,10 +51,22 @@
     <ClInclude Include="states\basestate.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="states\windowsizestate.hpp">
+    <ClInclude Include="states\messagestate.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="states\messagestate.hpp">
+    <ClInclude Include="game\field.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\preview.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\tetromino.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\tetrominofactory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,9 +89,6 @@
     <ClCompile Include="states\pausestate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="states\windowsizestate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="states\messagestate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -99,6 +108,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="conutils\window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\field.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\preview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\tetromino.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\tetrominofactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -39,11 +39,23 @@ void EventHandler::Update()
 				break;
 			case VK_LEFT:
 				if (ev.Event.KeyEvent.bKeyDown)
+					playerActionPresses.insert(PlayerActions::MoveLeft);
+				else
+					playerActionReleases.insert(PlayerActions::MoveLeft);
+				break;
+			case VK_RIGHT:
+				if (ev.Event.KeyEvent.bKeyDown)
+					playerActionPresses.insert(PlayerActions::MoveRight);
+				else
+					playerActionReleases.insert(PlayerActions::MoveRight);
+				break;
+			case 0x51: // Q
+				if (ev.Event.KeyEvent.bKeyDown)
 					playerActionPresses.insert(PlayerActions::RotateLeft);
 				else
 					playerActionReleases.insert(PlayerActions::RotateLeft);
 				break;
-			case VK_RIGHT:
+			case 0x45: // E
 				if (ev.Event.KeyEvent.bKeyDown)
 					playerActionPresses.insert(PlayerActions::RotateRight);
 				else
