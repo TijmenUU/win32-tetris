@@ -1,3 +1,4 @@
+#include "../config.hpp"
 #include "../eventhandler.hpp"
 #include "../statemanager.hpp"
 #include "pausestate.hpp"
@@ -17,12 +18,10 @@ void PauseState::Update(unsigned const elapsedMs)
 	}
 }
 
-PauseState::PauseState(
-	COORD const _lineStartPosition,
-	SHORT const _maxLineLength)
+PauseState::PauseState()
 	: MessageState(
-		_lineStartPosition,
-		_maxLineLength,
+		COORD{ Config::playingFieldPosition.X, Config::playingFieldPosition.Y + (Config::playingFieldSize.Y / 2) },
+		Config::playingFieldSize.X,
 		"Game is paused",
 		Color::Color(Color::Foreground::WHITE, Color::Background::BLUE))
 {

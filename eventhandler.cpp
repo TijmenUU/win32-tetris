@@ -3,6 +3,7 @@
 
 void EventHandler::ClearState()
 {
+	playerActionPresses.clear();
 	playerActionReleases.clear();
 	didWindowResize = false;
 }

@@ -15,14 +15,25 @@ namespace Game
 		COUNT
 	};
 
+	struct TetrominoState
+	{
+		COORD position;
+		std::vector<COORD> blocks;
+
+		std::vector<COORD> GetTranslatedBlocks() const;
+		void Draw(Color::Color const & color, char const character) const;
+
+		bool operator==(TetrominoState const& other) const;
+		bool operator!=(TetrominoState const& other) const;
+	};
+
 	class Tetromino
 	{
 	private:
 		TetrominoType const type;
-		COORD position;
-		const char character;
-		Color::Color color;
-		std::vector<COORD> blocks;
+		char const character;
+		Color::Color const color;
+		TetrominoState state;
 
 		Tetromino(TetrominoType const _type,
 			COORD _position,
@@ -33,13 +44,14 @@ namespace Game
 		void RotateRight();
 		void RotateLeft();
 
-		void MoveDown();
-		void MoveLeft();
-		void MoveRight();
+		void Move(SHORT const X_displacement);
 
 		void SetPosition(COORD const& _position);
+		void SetState(TetrominoState const& _state);
 
-		std::vector<COORD> GetBlockPositions() const;
+		TetrominoState const & GetState() const;
+		Color::Color const& GetColor() const;
+		char GetCharacter() const;
 
 		void Draw() const;
 

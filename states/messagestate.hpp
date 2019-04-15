@@ -2,14 +2,18 @@
 #include "basestate.hpp"
 #include "../conutils/color.hpp"
 #include <string>
+#include <vector>
 #include <Windows.h>
 
 class MessageState : public State
 {
-protected:
+private:
+	std::vector<CHAR_INFO> characterBackup;
 	COORD const lineStartPosition;
 	SHORT const maxLineLength;
 
+	void RestoreContent();
+	void BackupContent();
 	void DrawMessage(std::string msg, Color::Color const& color) const;
 
 public:

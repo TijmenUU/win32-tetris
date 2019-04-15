@@ -1,3 +1,4 @@
+#include "../config.hpp"
 #include "../conutils/color.hpp"
 #include "../conutils/coordops.hpp"
 #include "../conutils/cursor.hpp"
@@ -6,28 +7,14 @@
 #include "playingstate.hpp"
 #include "pausestate.hpp"
 
-COORD const playingFieldPosition{ 1, 1 };
-COORD const playingFieldSize{ 28, 28 };
-COORD const scorePosition{ playingFieldPosition.X + playingFieldSize.X + 2, 2 };
-
-COORD GetMessageCoordinate()
-{
-	return COORD({playingFieldPosition.X, playingFieldPosition.Y + (playingFieldSize.Y / 2)});
-}
-
 void PlayingState::Pause()
 {
 	StateManager& const stManager = StateManager::GetInstance();
-	stManager.PushState(std::make_unique<PauseState>(GetMessageCoordinate(), playingFieldSize.X));
+	stManager.PushState(std::make_unique<PauseState>());
 }
 
 void PlayingState::HandleInput(EventHandler const& evHandler)
 {
-	if (evHandler.WasActionReleased(PlayerActions::Escape))
-	{
-		StateManager::GetInstance().PopState();
-		return;
-	}
 	if (evHandler.WasActionReleased(PlayerActions::Pause))
 	{
 		Pause();
@@ -35,55 +22,49 @@ void PlayingState::HandleInput(EventHandler const& evHandler)
 	}
 }
 
-void PlayingState::DrawStatics() const
+void PlayingState::DrawGUI() const
 {
-	/* Clear everything */
+	std::cout << Color::Color(); // Black and white
+
+	/* Clear everything 
 	auto const window = Window::GetActiveViewportSize();
 	Cursor::Set({ 0, 0 });
-	std::cout << Color::Color(); // Black and white
 	for (SHORT y = 0; y < window.bottomRight.Y; ++y)
 	{
 		for (SHORT x = 0; x < window.bottomRight.X; ++x)
 		{
 			std::cout << ' '; 
 		}
-	}
+	}*/
 
 	/* SCORE LABEL */
-	Cursor::Set({ scorePosition.X, scorePosition.Y - 1});
+	Cursor::Set({ Config::scorePosition.X, Config::scorePosition.Y - 1});
 	std::cout << "SCORE:";
 
 	/* BORDERING */
 	char const borderChar = '#';
 	// Top and bottom
-	for (SHORT x = playingFieldPosition.X - 1U; x < playingFieldPosition.X + playingFieldSize.X + 1U; ++x)
+	for (SHORT x = Config::playingFieldPosition.X - 1U; x < Config::playingFieldPosition.X + Config::playingFieldSize.X + 1U; ++x)
 	{
-		Cursor::Set({ x, static_cast<SHORT>(playingFieldPosition.Y - 1U) });
+		Cursor::Set({ x, static_cast<SHORT>(Config::playingFieldPosition.Y - 1U) });
 		std::cout << borderChar;
 
-		Cursor::Set({ x, static_cast<SHORT>(playingFieldPosition.Y + playingFieldSize.Y) });
+		Cursor::Set({ x, static_cast<SHORT>(Config::playingFieldPosition.Y + Config::playingFieldSize.Y) });
 		std::cout << borderChar;
 	}
 
 	// Sides
-	for (SHORT y = playingFieldPosition.Y; y < playingFieldPosition.Y + playingFieldSize.Y; ++y)
+	for (SHORT y = Config::playingFieldPosition.Y; y < Config::playingFieldPosition.Y + Config::playingFieldSize.Y; ++y)
 	{
-		Cursor::Set({ static_cast<SHORT>(playingFieldPosition.X - 1U), y });
+		Cursor::Set({ static_cast<SHORT>(Config::playingFieldPosition.X - 1U), y });
 		std::cout << borderChar;
-		Cursor::Set({ playingFieldPosition.X + playingFieldSize.X, y });
+		Cursor::Set({ Config::playingFieldPosition.X + Config::playingFieldSize.X, y });
 		std::cout << borderChar;
 	}
 }
 
-void PlayingState::DrawDynamics() const
-{
-	field.Draw();
-}
-
 void PlayingState::Update(unsigned const elapsedMs)
 {
-	DrawDynamics();
-
 	EventHandler& evHandler = EventHandler::GetInstance();
 	if (evHandler.WasThereAnyAction())
 	{
@@ -94,12 +75,13 @@ void PlayingState::Update(unsigned const elapsedMs)
 
 void PlayingState::Awake()
 {
-	DrawStatics();
+	
 }
 
 PlayingState::PlayingState()
-	: field(playingFieldPosition, playingFieldSize)
+	: field(Config::playingFieldPosition, Config::playingFieldSize)
 {
+	DrawGUI();
 }
 
 PlayingState::~PlayingState()

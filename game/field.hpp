@@ -8,21 +8,28 @@ namespace Game
 	class Field
 	{
 	private:
-		COORD position;
-		COORD size;
+		COORD const position;
+		COORD const size;
+		COORD const tetroSpawnPosition;
+		COORD const previewTetroSpawnPosition;
+		std::vector<bool> occupiedBlocks;
 		TetrominoFactory tetrominoFactory;
 		std::unique_ptr<Tetromino> previewTetroPtr, currentTetroPtr;
+		unsigned elapsedTime; // in milliseconds
 
-		void HandleInput();
+		bool IsColliding(std::vector<COORD> const & blockPositions) const;
+		void Merge(std::vector<COORD> const& blockPositions);
+
+		void SpawnTetromino();
+
+		// Returns whether the player wants to move down
+		bool HandleInput();
 
 	public:
 		void Update(unsigned const elapsedMs);
-		// TODO Only refresh when changes happened
-		// TODO Refresh only changed lines
-		// TODO Allow outside line refresh trigger (to repaint area altered by pause text)
+
 		// TODO track tetromino blocks
 		// TODO add tetris row popping logic
-		void Draw() const;
 
 		Field(COORD _position, COORD _size);
 	};

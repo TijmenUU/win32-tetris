@@ -11,9 +11,7 @@ private:
 
 	void HandleInput(EventHandler const & evHandler);
 
-	void DrawStatics() const;
-	void DrawDynamics() const;
-	// TODO pause line field refresh logic
+	void DrawGUI() const;
 
 public:
 	void Update(unsigned const elapsedMs) override;
