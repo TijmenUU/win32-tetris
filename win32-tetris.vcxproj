@@ -133,7 +133,6 @@
     <ClInclude Include="conutils\event.hpp" />
     <ClInclude Include="conutils\window.hpp" />
     <ClInclude Include="game\field.hpp" />
-    <ClInclude Include="game\preview.hpp" />
     <ClInclude Include="game\tetromino.hpp" />
     <ClInclude Include="game\tetrominofactory.hpp" />
     <ClInclude Include="states\messagestate.hpp" />
@@ -152,7 +151,6 @@
     <ClCompile Include="core.cpp" />
     <ClCompile Include="eventhandler.cpp" />
     <ClCompile Include="game\field.cpp" />
-    <ClCompile Include="game\preview.cpp" />
     <ClCompile Include="game\tetromino.cpp" />
     <ClCompile Include="game\tetrominofactory.cpp" />
     <ClCompile Include="main.cpp" />

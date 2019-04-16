@@ -70,7 +70,7 @@ namespace Game
 			{
 				for (SHORT x = 0; x < size.X; ++x)
 				{
-					// If the block above is set, copy it and clear it
+					// Only copy if there is actually a "block" above us
 					if (occupiedBlocks[x + (y - 1) * size.X])
 					{
 						// Copy
@@ -175,7 +175,6 @@ namespace Game
 		currentTetroPtr->SetPosition(tetroSpawnPosition);
 		currentTetroPtr->Draw();
 
-		// TODO use previewTetro spawn coords
 		previewTetroPtr = std::make_unique<Tetromino>(tetrominoFactory.GetRandomTetromino(previewTetroSpawnPosition));
 		previewTetroPtr->Draw();
 	}
@@ -236,7 +235,6 @@ namespace Game
 				candidateState.position.Y -= 1;
 				if (IsColliding(candidateState.GetTranslatedBlocks()))
 				{
-					// Yes
 					candidateState = currentState;
 
 					candidateState.position.Y += 1;
@@ -279,7 +277,8 @@ namespace Game
 		tetrominoFactory(73816),
 		previewTetroPtr(nullptr),
 		currentTetroPtr(nullptr),
-		elapsedTime(0)
+		elapsedTime(0),
+		score(0)
 	{
 		occupiedBlocks.resize(_size.X * _size.Y);
 

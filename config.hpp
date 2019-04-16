@@ -1,3 +1,7 @@
+/*
+	Do yourself a favour and try not to include this in other
+	header files. Thanks!
+*/
 #pragma once
 #include <windows.h>
 

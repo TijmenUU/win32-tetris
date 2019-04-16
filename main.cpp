@@ -6,7 +6,7 @@ int main()
 {
 	Core core;
 
-	unsigned const targetFrameTime = 100;
+	unsigned const targetFrameTime = 16; // 60 FPS
 	core.Run(targetFrameTime);
 
 	return 0;

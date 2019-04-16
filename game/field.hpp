@@ -10,11 +10,14 @@ namespace Game
 	private:
 		COORD const position;
 		COORD const size;
+
 		COORD const tetroSpawnPosition;
 		COORD const previewTetroSpawnPosition;
 		std::vector<bool> occupiedBlocks;
+
 		TetrominoFactory tetrominoFactory;
 		std::unique_ptr<Tetromino> previewTetroPtr, currentTetroPtr;
+
 		unsigned elapsedTime; // in milliseconds
 		unsigned score;
 
