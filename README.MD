@@ -4,9 +4,10 @@ A fun little exercise that is not meant to be taken seriously. I was wondering i
 
 ## Build Dependencies
 - Visual studio 2019
+- ConsoleUtilities (already included)
 
 ## Platform Requirements
 - Windows 2000 and above (sorry Windows 98 users...)
 
 ## License
-See `license`.
+See the `license` file.
