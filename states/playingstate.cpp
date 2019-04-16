@@ -41,6 +41,10 @@ void PlayingState::DrawGUI() const
 	Cursor::Set({ Config::scorePosition.X, Config::scorePosition.Y - 1});
 	std::cout << "SCORE:";
 
+	/* PREVIEW BLOCK LABEL */
+	Cursor::Set({ Config::scorePosition.X, Config::scorePosition.Y + 2 });
+	std::cout << "NEXT:";
+
 	/* BORDERING */
 	char const borderChar = '#';
 	// Top and bottom

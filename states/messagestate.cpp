@@ -22,18 +22,18 @@ void MessageState::BackupContent()
 {
 	characterBackup.resize(maxLineLength);
 
-	SMALL_RECT writeRegion;
-	writeRegion.Top = lineStartPosition.Y;
-	writeRegion.Left = lineStartPosition.X;
-	writeRegion.Bottom = lineStartPosition.Y;
-	writeRegion.Right = lineStartPosition.X + characterBackup.size();
+	SMALL_RECT readRegion;
+	readRegion.Top = lineStartPosition.Y;
+	readRegion.Left = lineStartPosition.X;
+	readRegion.Bottom = lineStartPosition.Y;
+	readRegion.Right = lineStartPosition.X + characterBackup.size();
 
 	ReadConsoleOutput(
 		GetStdHandle(STD_OUTPUT_HANDLE),
 		&characterBackup[0],
 		COORD{ static_cast<SHORT>(characterBackup.size()), 1 },
 		COORD{ 0, 0 },
-		&writeRegion
+		&readRegion
 	);
 }
 
