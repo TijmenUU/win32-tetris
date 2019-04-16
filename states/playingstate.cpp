@@ -26,17 +26,6 @@ void PlayingState::DrawGUI() const
 {
 	std::cout << Color::Color(); // Black and white
 
-	/* Clear everything 
-	auto const window = Window::GetActiveViewportSize();
-	Cursor::Set({ 0, 0 });
-	for (SHORT y = 0; y < window.bottomRight.Y; ++y)
-	{
-		for (SHORT x = 0; x < window.bottomRight.X; ++x)
-		{
-			std::cout << ' '; 
-		}
-	}*/
-
 	/* SCORE LABEL */
 	Cursor::Set({ Config::scorePosition.X, Config::scorePosition.Y - 1});
 	std::cout << "SCORE:";
@@ -46,6 +35,7 @@ void PlayingState::DrawGUI() const
 	std::cout << "NEXT:";
 
 	/* BORDERING */
+	Color::Set(Color::Color(static_cast<std::uint8_t>(Color::Background::LIGHTGRAY)));
 	char const borderChar = '#';
 	// Top and bottom
 	for (SHORT x = Config::playingFieldPosition.X - 1U; x < Config::playingFieldPosition.X + Config::playingFieldSize.X + 1U; ++x)

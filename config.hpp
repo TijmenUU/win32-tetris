@@ -3,8 +3,8 @@
 
 namespace Config
 {
-	static COORD const consoleBufferSize{ 40, 30 }; // in characters
-	static COORD const windowSize{ 600, 525 };
+	static COORD const consoleBufferSize{ 25, 30 }; // in characters
+	static COORD const windowSize{ 350, 525 };
 
 	static COORD const playingFieldPosition{ 1, 1 };
 	static COORD const playingFieldSize{ 28, 28 };
