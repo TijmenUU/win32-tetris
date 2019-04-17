@@ -292,14 +292,23 @@ namespace Game
 	{
 		occupiedBlocks.resize(_size.X * _size.Y);
 
+		Color::Set(Color::Color()); // Black and white
+
+		// Clear the field
 		for (SHORT y = position.Y; y < position.Y + size.Y; ++y)
 		{
 			Cursor::Set(COORD{ position.X, y });
-			Color::Set(Color::Color()); // Black and white
 			for (SHORT x = position.X; x < position.X + size.X; ++x)
 			{
 				std::cout << ' ';
 			}
+		}
+
+		// Clear the preview tetromino area
+		for (SHORT y = 0; y < 5; ++y)
+		{
+			Cursor::Set({ previewTetroSpawnPosition.X, previewTetroSpawnPosition.Y + y });
+			std::cout << "     ";
 		}
 
 		previewTetroPtr = std::make_unique<Tetromino>(tetrominoFactory.GetRandomTetromino(previewTetroSpawnPosition));
