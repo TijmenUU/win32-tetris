@@ -2,6 +2,8 @@
 #include "../conutils/coordops.hpp"
 #include "../conutils/cursor.hpp"
 #include "../eventhandler.hpp"
+#include "../statemanager.hpp"
+#include "../states/gameoverstate.hpp"
 #include <cassert>
 #include <cstdio>
 #include "field.hpp"
@@ -177,6 +179,14 @@ namespace Game
 
 		previewTetroPtr = std::make_unique<Tetromino>(tetrominoFactory.GetRandomTetromino(previewTetroSpawnPosition));
 		previewTetroPtr->Draw();
+
+		if (IsColliding(currentTetroPtr->GetState().GetTranslatedBlocks()))
+		{
+			auto & stManager = StateManager::GetInstance();
+			stManager.PopState();
+			stManager.PushState(std::make_unique<GameOverState>());
+			return;
+		}
 	}
 
 	bool Field::HandleInput()

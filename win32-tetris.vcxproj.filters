@@ -66,6 +66,9 @@
     <ClInclude Include="game\tetrominofactory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="states\gameoverstate.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -114,6 +117,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="game\tetrominofactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="states\gameoverstate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
