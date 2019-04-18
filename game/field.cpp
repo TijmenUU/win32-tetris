@@ -99,14 +99,9 @@ namespace Game
 			);
 
 			// Update occupiedBlocks
-			for (SHORT y = row; y > 0; --y)
+			for (SHORT i = (size.X - 1) + row * size.X; i >= size.X; --i)
 			{
-				for (SHORT x = 0; x < size.X; ++x)
-				{
-					unsigned const dst = x + y * size.X;
-					unsigned const src = dst - size.X;
-					occupiedBlocks[dst] = occupiedBlocks[src];
-				}
+				occupiedBlocks[i] = occupiedBlocks[i - size.X];
 			}
 		}
 
@@ -129,6 +124,7 @@ namespace Game
 			{
 				PopRow(y);
 				++rowsPopped;
+				--y;
 			}
 		}
 
