@@ -68,47 +68,44 @@ namespace Game
 		// Shift everything down
 		if (row > 0)
 		{
+			// Correct the visuals
+			std::vector<CHAR_INFO> blocks;
+			blocks.resize(size.X * row);
+
+			SMALL_RECT region;
+			region.Top = position.Y;
+			region.Left = position.X;
+			region.Bottom = position.Y + row;
+			region.Right = region.Left + size.X;
+
+			COORD const bufferSize{ size.X, row };
+
+			ReadConsoleOutput(
+				GetStdHandle(STD_OUTPUT_HANDLE),
+				&blocks[0],
+				bufferSize,
+				COORD{ 0, 0 },
+				&region
+			);
+
+			++region.Top;
+			++region.Bottom;
+			WriteConsoleOutput(
+				GetStdHandle(STD_OUTPUT_HANDLE),
+				&blocks[0],
+				bufferSize,
+				COORD{ 0, 0 },
+				&region
+			);
+
+			// Update occupiedBlocks
 			for (SHORT y = row; y > 0; --y)
 			{
 				for (SHORT x = 0; x < size.X; ++x)
 				{
-					// Only copy if there is actually a "block" above us
-					if (occupiedBlocks[x + (y - 1) * size.X])
-					{
-						// Copy
-						CHAR_INFO block;
-						SMALL_RECT region;
-						region.Top = position.Y + (y - 1);
-						region.Left = position.X + x;
-						region.Bottom = region.Top;
-						region.Right = region.Left + 1;
-
-						ReadConsoleOutput(
-							GetStdHandle(STD_OUTPUT_HANDLE),
-							&block,
-							COORD{ 1, 1 },
-							COORD{ 0, 0 },
-							&region
-						);
-
-						occupiedBlocks[x + y * size.X] = true;
-
-						++region.Top;
-						++region.Bottom;
-						WriteConsoleOutput(
-							GetStdHandle(STD_OUTPUT_HANDLE),
-							&block,
-							COORD{ 1, 1 },
-							COORD{ 0, 0 },
-							&region
-						);
-
-						// Clear
-						Cursor::Set(COORD{ x + position.X, (y - 1) + position.Y });
-						Color::Set(Color::Color());
-						std::cout << ' ';
-						occupiedBlocks[x + (y - 1) * size.X] = false;
-					}
+					unsigned const dst = x + y * size.X;
+					unsigned const src = dst - size.X;
+					occupiedBlocks[dst] = occupiedBlocks[src];
 				}
 			}
 		}
