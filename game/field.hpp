@@ -1,6 +1,4 @@
 #pragma once
-#include <memory>
-#include "tetrominofactory.hpp"
 #include <Windows.h>
 
 namespace Game
@@ -11,36 +9,19 @@ namespace Game
 		COORD const position;
 		COORD const size;
 
-		COORD const tetroSpawnPosition;
-		COORD const previewTetroSpawnPosition;
 		std::vector<bool> occupiedBlocks;
 
-		TetrominoFactory tetrominoFactory;
-		std::unique_ptr<Tetromino> previewTetroPtr, currentTetroPtr;
-
-		unsigned elapsedTime; // in milliseconds
-		unsigned score;
-
-		void DrawScore() const;
-
 		bool IsBlockOutOfBounds(COORD const& block) const;
-		bool IsColliding(std::vector<COORD> const & blockPositions) const;
-
 		bool IsRowFull(SHORT const row) const;
 		void PopRow(SHORT const row);
-		void PopFullRows(SHORT const startRow, SHORT const endRow);
-		void Merge(std::vector<COORD> const& blockPositions);
-
-		void SpawnTetromino();
-
-		// Returns whether the player wants to move down
-		bool HandleInput();
+		unsigned PopFullRows(SHORT const startRow, SHORT const endRow);
 
 	public:
-		void Update(unsigned const elapsedMs);
+		unsigned Merge(std::vector<COORD> const& blockPositions);
+		bool IsColliding(std::vector<COORD> const& blockPositions) const;
 
-		// TODO track tetromino blocks
-		// TODO add tetris row popping logic
+		COORD const& GetPosition() const;
+		COORD const& GetSize() const;
 
 		Field(COORD _position, COORD _size);
 	};

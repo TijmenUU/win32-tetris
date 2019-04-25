@@ -9,7 +9,7 @@
 
 void PlayingState::Pause()
 {
-	StateManager& const stManager = StateManager::GetInstance();
+	StateManager& stManager = StateManager::GetInstance();
 	stManager.PushState(std::make_unique<PauseState>());
 }
 
@@ -31,16 +31,16 @@ void PlayingState::DrawGUI() const
 	std::cout << "SCORE:";
 
 	/* PREVIEW BLOCK LABEL */
-	Cursor::Set({ Config::scorePosition.X, Config::scorePosition.Y + 2 });
+	Cursor::Set({ Config::previewTetrominoPosition.X, Config::previewTetrominoPosition.Y - 1 });
 	std::cout << "NEXT:";
 
 	/* BORDERING */
 	Color::Set(Color::Color(static_cast<std::uint8_t>(Color::Background::LIGHTGRAY)));
 	char const borderChar = '#';
 	// Top and bottom
-	for (SHORT x = Config::playingFieldPosition.X - 1U; x < Config::playingFieldPosition.X + Config::playingFieldSize.X + 1U; ++x)
+	for (SHORT x = Config::playingFieldPosition.X - 1; x < Config::playingFieldPosition.X + Config::playingFieldSize.X + 1; ++x)
 	{
-		Cursor::Set({ x, static_cast<SHORT>(Config::playingFieldPosition.Y - 1U) });
+		Cursor::Set({ x, static_cast<SHORT>(Config::playingFieldPosition.Y - 1) });
 		std::cout << borderChar;
 
 		Cursor::Set({ x, static_cast<SHORT>(Config::playingFieldPosition.Y + Config::playingFieldSize.Y) });
@@ -50,7 +50,7 @@ void PlayingState::DrawGUI() const
 	// Sides
 	for (SHORT y = Config::playingFieldPosition.Y; y < Config::playingFieldPosition.Y + Config::playingFieldSize.Y; ++y)
 	{
-		Cursor::Set({ static_cast<SHORT>(Config::playingFieldPosition.X - 1U), y });
+		Cursor::Set({ static_cast<SHORT>(Config::playingFieldPosition.X - 1), y });
 		std::cout << borderChar;
 		Cursor::Set({ Config::playingFieldPosition.X + Config::playingFieldSize.X, y });
 		std::cout << borderChar;
@@ -64,7 +64,8 @@ void PlayingState::Update(unsigned const elapsedMs)
 	{
 		HandleInput(evHandler);
 	}
-	field.Update(elapsedMs);
+
+	player.Update(elapsedMs);
 }
 
 void PlayingState::Awake()
@@ -73,7 +74,8 @@ void PlayingState::Awake()
 }
 
 PlayingState::PlayingState()
-	: field(Config::playingFieldPosition, Config::playingFieldSize)
+	: field(Config::playingFieldPosition, Config::playingFieldSize),
+	player(Config::previewTetrominoPosition, Config::scorePosition, field)
 {
 	DrawGUI();
 }

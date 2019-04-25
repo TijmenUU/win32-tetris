@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <random>
 #include "tetromino.hpp"
 
@@ -12,8 +13,8 @@ namespace Game
 		std::vector<Tetromino> tetrominos;
 
 	public:
-		Tetromino GetTetromino(TetrominoType const type, COORD const& spawnPosition);
-		Tetromino GetRandomTetromino(COORD const& spawnPosition);
+		std::unique_ptr<Tetromino> GetTetromino(TetrominoType const type, COORD const& spawnPosition);
+		std::unique_ptr<Tetromino> GetRandomTetromino(COORD const& spawnPosition);
 
 		TetrominoFactory(int const seed);
 	};

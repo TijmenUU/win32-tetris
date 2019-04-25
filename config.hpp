@@ -13,4 +13,5 @@ namespace Config
 	static COORD const playingFieldPosition{ 1, 1 };
 	static COORD const playingFieldSize{ 28, 28 };
 	static COORD const scorePosition{ playingFieldPosition.X + playingFieldSize.X + 2, 2 };
+	static COORD const previewTetrominoPosition{ playingFieldPosition.X + playingFieldSize.X + 3, playingFieldPosition.Y + 4 };
 }

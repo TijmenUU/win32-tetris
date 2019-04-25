@@ -114,87 +114,87 @@ namespace Game
 		state.position = _position;
 	}
 
-	Tetromino Tetromino::CreateBar(COORD const _position)
+	std::unique_ptr<Tetromino> Tetromino::CreateBar(COORD const _position)
 	{
-		auto t = Tetromino(
+		auto t = std::make_unique<Tetromino>(
 			TetrominoType::Bar,
 			_position,
 			'=',
 			Color::Color(Color::Foreground::CYAN, Color::Background::DARKCYAN)
 		);
 
-		t.state.blocks.push_back(COORD{ 0, 0 });
-		t.state.blocks.push_back(COORD{ 0, 1 });
-		t.state.blocks.push_back(COORD{ 0, 2 });
-		t.state.blocks.push_back(COORD{ 0, 3 });
+		t->state.blocks.push_back(COORD{ 0, 0 });
+		t->state.blocks.push_back(COORD{ 0, 1 });
+		t->state.blocks.push_back(COORD{ 0, 2 });
+		t->state.blocks.push_back(COORD{ 0, 3 });
 
 		return t;
 	}
 
-	Tetromino Tetromino::CreateBlock(COORD const _position)
+	std::unique_ptr<Tetromino> Tetromino::CreateBlock(COORD const _position)
 	{
-		auto t = Tetromino(
+		auto t = std::make_unique<Tetromino>(
 			TetrominoType::Block,
 			_position,
 			'O',
 			Color::Color(Color::Foreground::YELLOW, Color::Background::DARKYELLOW)
 		);
 
-		t.state.blocks.push_back(COORD{ 0, 0 });
-		t.state.blocks.push_back(COORD{ 0, 1 });
-		t.state.blocks.push_back(COORD{ 1, 0 });
-		t.state.blocks.push_back(COORD{ 1, 1 });
+		t->state.blocks.push_back(COORD{ 0, 0 });
+		t->state.blocks.push_back(COORD{ 0, 1 });
+		t->state.blocks.push_back(COORD{ 1, 0 });
+		t->state.blocks.push_back(COORD{ 1, 1 });
 
 		return t;
 	}
 
-	Tetromino Tetromino::CreateL(COORD const _position)
+	std::unique_ptr<Tetromino> Tetromino::CreateL(COORD const _position)
 	{
-		auto t = Tetromino(
+		auto t = std::make_unique<Tetromino>(
 			TetrominoType::L,
 			_position,
 			'L',
 			Color::Color(Color::Foreground::RED, Color::Background::DARKRED)
 		);
 
-		t.state.blocks.push_back(COORD{ 0, 0 });
-		t.state.blocks.push_back(COORD{ 0, 1 });
-		t.state.blocks.push_back(COORD{ 0, 2 });
-		t.state.blocks.push_back(COORD{ 1, 2 });
+		t->state.blocks.push_back(COORD{ 0, 0 });
+		t->state.blocks.push_back(COORD{ 0, 1 });
+		t->state.blocks.push_back(COORD{ 0, 2 });
+		t->state.blocks.push_back(COORD{ 1, 2 });
 
 		return t;
 	}
 
-	Tetromino Tetromino::CreateZ(COORD const _position)
+	std::unique_ptr<Tetromino> Tetromino::CreateZ(COORD const _position)
 	{
-		auto t = Tetromino(
+		auto t = std::make_unique<Tetromino>(
 			TetrominoType::Z,
 			_position,
 			'Z',
 			Color::Color(Color::Foreground::GREEN, Color::Background::DARKGREEN)
 		);
 
-		t.state.blocks.push_back(COORD{ 0, 0 });
-		t.state.blocks.push_back(COORD{ 0, 1 });
-		t.state.blocks.push_back(COORD{ 1, 1 });
-		t.state.blocks.push_back(COORD{ 1, 2 });
+		t->state.blocks.push_back(COORD{ 0, 0 });
+		t->state.blocks.push_back(COORD{ 0, 1 });
+		t->state.blocks.push_back(COORD{ 1, 1 });
+		t->state.blocks.push_back(COORD{ 1, 2 });
 
 		return t;
 	}
 
-	Tetromino Tetromino::CreateTriangle(COORD const _position)
+	std::unique_ptr<Tetromino> Tetromino::CreateTriangle(COORD const _position)
 	{
-		auto t = Tetromino(
+		auto t = std::make_unique<Tetromino>(
 			TetrominoType::Triangle,
 			_position,
 			'=',
 			Color::Color(Color::Foreground::PURPLE, Color::Background::DARKPURPLE)
 		);
 
-		t.state.blocks.push_back(COORD{ 0, 0 });
-		t.state.blocks.push_back(COORD{ 1, 0 });
-		t.state.blocks.push_back(COORD{ 2, 0 });
-		t.state.blocks.push_back(COORD{ 1, 1 });
+		t->state.blocks.push_back(COORD{ 0, 0 });
+		t->state.blocks.push_back(COORD{ 1, 0 });
+		t->state.blocks.push_back(COORD{ 2, 0 });
+		t->state.blocks.push_back(COORD{ 1, 1 });
 
 		return t;
 	}

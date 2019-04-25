@@ -2,7 +2,7 @@
 
 namespace Game
 {
-	Tetromino TetrominoFactory::GetTetromino(TetrominoType const type, COORD const& spawnPosition)
+	std::unique_ptr<Tetromino> TetrominoFactory::GetTetromino(TetrominoType const type, COORD const& spawnPosition)
 	{
 		switch (type)
 		{
@@ -24,7 +24,7 @@ namespace Game
 		}
 	}
 
-	Tetromino TetrominoFactory::GetRandomTetromino(COORD const& spawnPosition)
+	std::unique_ptr<Tetromino> TetrominoFactory::GetRandomTetromino(COORD const& spawnPosition)
 	{
 		TetrominoType const type = static_cast<TetrominoType>(dist(eng));
 		return GetTetromino(type, spawnPosition);

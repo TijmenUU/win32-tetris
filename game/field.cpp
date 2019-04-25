@@ -2,44 +2,14 @@
 #include "../conutils/coordops.hpp"
 #include "../conutils/cursor.hpp"
 #include "../eventhandler.hpp"
-#include "../statemanager.hpp"
-#include "../states/gameoverstate.hpp"
-#include <cassert>
 #include <cstdio>
 #include "field.hpp"
 
-unsigned const autodropIntervalInMs = 300;
-
 namespace Game
 {
-	void Field::DrawScore() const
-	{
-		Color::Set(Color::Color());
-		Cursor::Set(COORD{ position.X + size.X + 2, position.Y + 1 });
-		
-		std::printf("%05u", score); // Oh boy, we're mixing with C libs now
-	}
-
 	bool Field::IsBlockOutOfBounds(COORD const& block) const
 	{
 		return block.X < position.X || block.X >= (position.X + size.X) || block.Y < position.Y || block.Y >= (position.Y + size.Y);
-	}
-
-	bool Field::IsColliding(std::vector<COORD> const& blockPositions) const
-	{
-		for (auto const& b : blockPositions)
-		{
-			if (IsBlockOutOfBounds(b))
-				return true;
-
-			unsigned const index = (b.X - position.X) + (b.Y - position.Y) * size.X;
-			if (occupiedBlocks[index])
-			{
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	bool Field::IsRowFull(SHORT const row) const
@@ -115,10 +85,10 @@ namespace Game
 		}
 	}
 
-	void Field::PopFullRows(SHORT const startRow, SHORT const endRow)
+	unsigned Field::PopFullRows(SHORT const startRow, SHORT const endRow)
 	{
 		unsigned rowsPopped = 0;
-		for (SHORT y = startRow; y < endRow; ++y)
+		for (SHORT y = startRow; y <= endRow; ++y)
 		{
 			if (IsRowFull(y))
 			{
@@ -128,14 +98,10 @@ namespace Game
 			}
 		}
 
-		if (rowsPopped)
-		{
-			score += rowsPopped * 125;
-			DrawScore();
-		}
+		return rowsPopped;
 	}
 
-	void Field::Merge(std::vector<COORD> const& blockPositions)
+	unsigned Field::Merge(std::vector<COORD> const& blockPositions)
 	{
 		SHORT minY = size.Y, maxY = 0;
 		for (auto const& b : blockPositions)
@@ -152,136 +118,39 @@ namespace Game
 			occupiedBlocks[index] = true;
 		}
 
-		PopFullRows(minY, maxY);
-		SpawnTetromino();
+		return PopFullRows(minY - position.Y, maxY - position.Y);
 	}
 
-	void Field::SpawnTetromino()
+	bool Field::IsColliding(std::vector<COORD> const& blockPositions) const
 	{
-		Color::Set(Color::Color());
-		auto const previewblocks = previewTetroPtr->GetState().GetTranslatedBlocks();
-		for (auto const& b : previewblocks)
+		for (auto const& b : blockPositions)
 		{
-			Cursor::Set(b);
-			std::cout << ' ';
-		}
+			if (IsBlockOutOfBounds(b))
+				return true;
 
-		currentTetroPtr.swap(previewTetroPtr);
-		currentTetroPtr->SetPosition(tetroSpawnPosition);
-		currentTetroPtr->Draw();
-
-		previewTetroPtr = std::make_unique<Tetromino>(tetrominoFactory.GetRandomTetromino(previewTetroSpawnPosition));
-		previewTetroPtr->Draw();
-
-		if (IsColliding(currentTetroPtr->GetState().GetTranslatedBlocks()))
-		{
-			auto & stManager = StateManager::GetInstance();
-			stManager.PopState();
-			stManager.PushState(std::make_unique<GameOverState>());
-			return;
-		}
-	}
-
-	bool Field::HandleInput()
-	{
-		assert(currentTetroPtr != nullptr);
-
-		EventHandler const& evHandler = EventHandler::GetInstance();
-		if (evHandler.WasActionReleased(PlayerActions::RotateLeft))
-		{
-			currentTetroPtr->RotateLeft();
-		}
-		else if (evHandler.WasActionReleased(PlayerActions::RotateRight))
-		{
-			currentTetroPtr->RotateRight();
-		}
-
-		SHORT X_movement = 0;	
-		if (evHandler.WasActionReleased(PlayerActions::MoveLeft))
-		{
-			X_movement -= 1;
-		}
-		else if (evHandler.WasActionReleased(PlayerActions::MoveRight))
-		{
-			X_movement += 1;
-		}
-
-		currentTetroPtr->Move(X_movement);
-
-		if (evHandler.WasActionPressed(PlayerActions::MoveDown))
-		{
-			return true;
-		}
-	}
-
-	void Field::Update(unsigned const elapsedMs)
-	{
-		bool drop = false;
-
-		elapsedTime += elapsedMs;
-		if (elapsedTime >= autodropIntervalInMs)
-		{
-			drop = true;
-			elapsedTime = 0U;
-		}
-
-		TetrominoState const currentState = currentTetroPtr->GetState();
-		drop = drop || HandleInput();
-		
-		TetrominoState candidateState = currentTetroPtr->GetState();
-		if (drop)
-		{
-			candidateState.position.Y += 1;
-			if (IsColliding(candidateState.GetTranslatedBlocks()))
+			unsigned const index = (b.X - position.X) + (b.Y - position.Y) * size.X;
+			if (occupiedBlocks[index])
 			{
-				// Illegal move ?
-				candidateState.position.Y -= 1;
-				if (IsColliding(candidateState.GetTranslatedBlocks()))
-				{
-					candidateState = currentState;
-
-					candidateState.position.Y += 1;
-					if (IsColliding(candidateState.GetTranslatedBlocks()))
-					{
-						Merge(currentState.GetTranslatedBlocks());
-						return;
-					}
-				}
-				else
-				{
-					Merge(candidateState.GetTranslatedBlocks());			
-					return;
-				}
-			}		
-		}
-		else
-		{
-			if (IsColliding(candidateState.GetTranslatedBlocks()))
-			{
-				// Illegal move
-				candidateState = currentState;
+				return true;
 			}
 		}
 
-		currentTetroPtr->SetState(candidateState);
+		return false;
+	}
 
-		if (drop || currentState != candidateState)
-		{
-			currentState.Draw(Color::Color(), ' ');
-			currentTetroPtr->Draw();
-		}
+	COORD const& Field::GetPosition() const
+	{
+		return position;
+	}
+
+	COORD const& Field::GetSize() const
+	{
+		return size;
 	}
 
 	Field::Field(COORD _position, COORD _size)
 		: position(_position),
-		size(_size),
-		tetroSpawnPosition({ _position.X + _size.X / 2, _position.Y }),
-		previewTetroSpawnPosition({_position.X + _size.X + 3, _position.Y + 4}),
-		tetrominoFactory(73816),
-		previewTetroPtr(nullptr),
-		currentTetroPtr(nullptr),
-		elapsedTime(0),
-		score(0)
+		size(_size)
 	{
 		occupiedBlocks.resize(_size.X * _size.Y);
 
@@ -296,17 +165,5 @@ namespace Game
 				std::cout << ' ';
 			}
 		}
-
-		// Clear the preview tetromino area
-		for (SHORT y = 0; y < 5; ++y)
-		{
-			Cursor::Set({ previewTetroSpawnPosition.X, previewTetroSpawnPosition.Y + y });
-			std::cout << "     ";
-		}
-
-		previewTetroPtr = std::make_unique<Tetromino>(tetrominoFactory.GetRandomTetromino(previewTetroSpawnPosition));
-		SpawnTetromino();
-
-		DrawScore();
 	}
 }

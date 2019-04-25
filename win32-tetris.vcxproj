@@ -132,6 +132,7 @@
     <ClInclude Include="eventhandler.hpp" />
     <ClInclude Include="conutils\event.hpp" />
     <ClInclude Include="conutils\window.hpp" />
+    <ClInclude Include="game\player.hpp" />
     <ClInclude Include="states\gameoverstate.hpp" />
     <ClInclude Include="game\field.hpp" />
     <ClInclude Include="game\tetromino.hpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="conutils\window.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="eventhandler.cpp" />
+    <ClCompile Include="game\player.cpp" />
     <ClCompile Include="states\gameoverstate.cpp" />
     <ClCompile Include="game\field.cpp" />
     <ClCompile Include="game\tetromino.cpp" />

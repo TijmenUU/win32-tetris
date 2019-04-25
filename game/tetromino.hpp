@@ -1,5 +1,6 @@
 #pragma once
 #include "../conutils/color.hpp"
+#include <memory>
 #include <vector>
 #include <Windows.h>
 
@@ -35,12 +36,12 @@ namespace Game
 		Color::Color const color;
 		TetrominoState state;
 
+	public:
 		Tetromino(TetrominoType const _type,
 			COORD _position,
 			char const _character,
 			Color::Color const _color);
 
-	public:
 		void RotateRight();
 		void RotateLeft();
 
@@ -55,11 +56,11 @@ namespace Game
 
 		void Draw() const;
 
-		static Tetromino CreateBar(COORD const _position);
-		static Tetromino CreateBlock(COORD const _position);
-		static Tetromino CreateL(COORD const _position);
-		static Tetromino CreateZ(COORD const _position);
-		static Tetromino CreateTriangle(COORD const _position);
+		static std::unique_ptr<Tetromino> CreateBar(COORD const _position);
+		static std::unique_ptr<Tetromino> CreateBlock(COORD const _position);
+		static std::unique_ptr<Tetromino> CreateL(COORD const _position);
+		static std::unique_ptr<Tetromino> CreateZ(COORD const _position);
+		static std::unique_ptr<Tetromino> CreateTriangle(COORD const _position);
 	};
 }
 

@@ -6,10 +6,10 @@
 
 void Core::Run(unsigned const targetFrameTime)
 {
-	StateManager& const stManager = StateManager::GetInstance();
+	StateManager& stManager = StateManager::GetInstance();
 	stManager.PushState(std::make_unique<PlayingState>());
 
-	EventHandler& const evHandler = EventHandler::GetInstance();
+	EventHandler& evHandler = EventHandler::GetInstance();
 	while (stManager.StateCount())
 	{
 		auto const start = std::chrono::steady_clock::now();
