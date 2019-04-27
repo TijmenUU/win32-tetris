@@ -36,9 +36,6 @@
     <ClInclude Include="conutils\window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="statemanager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="states\playingstate.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -72,15 +69,15 @@
     <ClInclude Include="entity\tetrominofactory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="statestack.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="eventhandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="statemanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="states\playingstate.cpp">
@@ -126,6 +123,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="entity\tetrominofactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="statestack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -3,20 +3,20 @@
 #include <memory>
 #include "states/basestate.hpp"
 
-class StateManager
+class StateStack
 {
 private:
 	std::vector<std::unique_ptr<State>> states;
 
-	StateManager() = default;
-	~StateManager() = default;
-public:
-	void Update(unsigned const elapsedMs);
+	StateStack() = default;
+	~StateStack() = default;
 
+public:
 	void PushState(std::unique_ptr<State>&& state);
 	void PopState();
 	std::size_t StateCount() const;
+	State* const GetTopState();
 
-	static StateManager & GetInstance();
+	static StateStack & GetInstance();
 };
 

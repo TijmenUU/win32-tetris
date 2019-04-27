@@ -1,6 +1,6 @@
 #include "../config.hpp"
 #include "../eventhandler.hpp"
-#include "../statemanager.hpp"
+#include "../statestack.hpp"
 #include "pausestate.hpp"
 
 void PauseState::Update(unsigned const elapsedMs)
@@ -8,12 +8,12 @@ void PauseState::Update(unsigned const elapsedMs)
 	EventHandler& evHandler = EventHandler::GetInstance();
 	if (evHandler.WasActionReleased(PlayerActions::Pause))
 	{
-		StateManager::GetInstance().PopState();
+		StateStack::GetInstance().PopState();
 		return;
 	}
 	if (evHandler.WasActionReleased(PlayerActions::Escape))
 	{
-		StateManager::GetInstance().PopState();
+		StateStack::GetInstance().PopState();
 		return;
 	}
 }

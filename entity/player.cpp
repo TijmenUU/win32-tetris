@@ -1,5 +1,5 @@
 #include "../conutils/cursor.hpp"
-#include "../statemanager.hpp"
+#include "../statestack.hpp"
 #include "../states/gameoverstate.hpp"
 #include <cassert>
 #include <cstdio>
@@ -55,9 +55,9 @@ namespace Entity
 
 		if (field.IsColliding(currentTetroPtr->GetState().GetTranslatedBlocks()))
 		{
-			auto& stManager = StateManager::GetInstance();
-			stManager.PopState();
-			stManager.PushState(std::make_unique<GameOverState>());
+			auto& stateStack = StateStack::GetInstance();
+			stateStack.PopState();
+			stateStack.PushState(std::make_unique<GameOverState>());
 			return;
 		}
 	}

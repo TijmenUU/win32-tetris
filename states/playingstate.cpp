@@ -3,14 +3,14 @@
 #include "../conutils/coordops.hpp"
 #include "../conutils/cursor.hpp"
 #include "../conutils/window.hpp"
-#include "../statemanager.hpp"
+#include "../statestack.hpp"
 #include "playingstate.hpp"
 #include "pausestate.hpp"
 
 void PlayingState::Pause()
 {
-	StateManager& stManager = StateManager::GetInstance();
-	stManager.PushState(std::make_unique<PauseState>());
+	StateStack& stateStack = StateStack::GetInstance();
+	stateStack.PushState(std::make_unique<PauseState>());
 }
 
 void PlayingState::HandleInput(EventHandler const& evHandler)

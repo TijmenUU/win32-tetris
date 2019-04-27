@@ -1,6 +1,6 @@
 #pragma once
 #include "eventhandler.hpp"
-#include "statemanager.hpp"
+#include "statestack.hpp"
 
 class Game
 {

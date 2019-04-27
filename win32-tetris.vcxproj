@@ -141,7 +141,7 @@
     <ClInclude Include="states\pausestate.hpp" />
     <ClInclude Include="states\playingstate.hpp" />
     <ClInclude Include="states\basestate.hpp" />
-    <ClInclude Include="statemanager.hpp" />
+    <ClInclude Include="statestack.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="conutils\clipboard.cpp" />
@@ -161,7 +161,7 @@
     <ClCompile Include="states\messagestate.cpp" />
     <ClCompile Include="states\pausestate.cpp" />
     <ClCompile Include="states\playingstate.cpp" />
-    <ClCompile Include="statemanager.cpp" />
+    <ClCompile Include="statestack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

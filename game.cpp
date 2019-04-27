@@ -6,16 +6,16 @@
 
 void Game::Run(unsigned const targetFrameTime)
 {
-	StateManager& stManager = StateManager::GetInstance();
-	stManager.PushState(std::make_unique<PlayingState>());
+	StateStack& stateStack = StateStack::GetInstance();
+	stateStack.PushState(std::make_unique<PlayingState>());
 
 	EventHandler& evHandler = EventHandler::GetInstance();
-	while (stManager.StateCount())
+	while (stateStack.StateCount())
 	{
 		auto const start = std::chrono::steady_clock::now();
 
 		evHandler.Update();
-		stManager.Update(targetFrameTime);
+		stateStack.GetTopState()->Update(targetFrameTime);
 
 		auto const sleepTime = targetFrameTime - std::chrono::duration_cast<std::chrono::milliseconds>(start - std::chrono::steady_clock::now()).count();
 		if (sleepTime > 0)

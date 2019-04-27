@@ -1,6 +1,6 @@
 #include "../config.hpp"
 #include "../eventhandler.hpp"
-#include "../statemanager.hpp"
+#include "../statestack.hpp"
 #include "gameoverstate.hpp"
 #include "playingstate.hpp"
 
@@ -10,15 +10,15 @@ void GameOverState::Update(unsigned const elapsedMs)
 
 	if (evHandler.WasActionReleased(PlayerActions::Yes))
 	{
-		auto& stManager = StateManager::GetInstance();
-		stManager.PopState();
-		stManager.PushState(std::make_unique<PlayingState>());
+		auto& stateStack = StateStack::GetInstance();
+		stateStack.PopState();
+		stateStack.PushState(std::make_unique<PlayingState>());
 		return;
 	}
 	else if (evHandler.WasActionReleased(PlayerActions::No))
 	{
-		auto& stManager = StateManager::GetInstance();
-		stManager.PopState();
+		auto& stateStack = StateStack::GetInstance();
+		stateStack.PopState();
 		return;
 	}
 }
