@@ -1,6 +1,6 @@
 #include "tetrominofactory.hpp"
 
-namespace Game
+namespace Entity
 {
 	std::unique_ptr<Tetromino> TetrominoFactory::GetTetromino(TetrominoType const type, COORD const& spawnPosition)
 	{

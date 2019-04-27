@@ -2,12 +2,12 @@
 #include "eventhandler.hpp"
 #include "statemanager.hpp"
 
-class Core
+class Game
 {
 public:
 	void Run(unsigned const targetFrameTime);
 
-	Core();
-	~Core();
+	Game();
+	~Game();
 };
 

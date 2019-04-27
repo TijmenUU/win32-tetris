@@ -1,10 +1,10 @@
 #include "config.hpp"
-#include "core.hpp"
+#include "game.hpp"
 #include "states/playingstate.hpp"
 #include <thread>
 #include <Windows.h>
 
-void Core::Run(unsigned const targetFrameTime)
+void Game::Run(unsigned const targetFrameTime)
 {
 	StateManager& stManager = StateManager::GetInstance();
 	stManager.PushState(std::make_unique<PlayingState>());
@@ -25,7 +25,7 @@ void Core::Run(unsigned const targetFrameTime)
 	}
 }
 
-Core::Core()
+Game::Game()
 {
 	// Setup the console screen
 	HANDLE stdoutHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -64,6 +64,6 @@ Core::Core()
 	SetConsoleCursorInfo(stdoutHandle, &cursorInfo);
 }
 
-Core::~Core()
+Game::~Game()
 {
 }

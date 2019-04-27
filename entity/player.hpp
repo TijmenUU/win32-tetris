@@ -3,7 +3,7 @@
 #include <memory>
 #include "tetrominofactory.hpp"
 
-namespace Game
+namespace Entity
 {
 	class Player
 	{

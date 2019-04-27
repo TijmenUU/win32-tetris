@@ -21,7 +21,7 @@ private:
 	std::unordered_set<PlayerActions> playerActionReleases;
 	bool didWindowResize;
 
-	friend class Core;
+	friend class Game;
 	void ClearState();
 	void Update();
 

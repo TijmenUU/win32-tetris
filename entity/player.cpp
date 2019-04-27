@@ -5,7 +5,7 @@
 #include <cstdio>
 #include "player.hpp"
 
-namespace Game
+namespace Entity
 {
 	unsigned const autodropIntervalInMs = 300;
 

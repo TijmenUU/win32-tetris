@@ -3,7 +3,7 @@
 #include <random>
 #include "tetromino.hpp"
 
-namespace Game
+namespace Entity
 {
 	class TetrominoFactory
 	{

@@ -1,7 +1,7 @@
 #pragma once
 #include <Windows.h>
 
-namespace Game
+namespace Entity
 {
 	class Field
 	{

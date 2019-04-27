@@ -2,7 +2,7 @@
 #include "../conutils/cursor.hpp"
 #include "tetromino.hpp"
 
-namespace Game
+namespace Entity
 {
 	std::vector<COORD> TetrominoState::GetTranslatedBlocks() const
 	{

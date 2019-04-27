@@ -1,13 +1,13 @@
 #pragma once
-#include "../game/field.hpp"
-#include "../game/player.hpp"
+#include "../entity/field.hpp"
+#include "../entity/player.hpp"
 #include "basestate.hpp"
 
 class PlayingState : public State
 {
 private:
-	Game::Field field;
-	Game::Player player;
+	Entity::Field field;
+	Entity::Player player;
 
 	void Pause();
 

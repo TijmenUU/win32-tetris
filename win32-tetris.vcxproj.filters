@@ -39,9 +39,6 @@
     <ClInclude Include="statemanager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="states\playingstate.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -54,22 +51,25 @@
     <ClInclude Include="states\messagestate.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game\field.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="config.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\tetromino.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game\tetrominofactory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="states\gameoverstate.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game\player.hpp">
+    <ClInclude Include="game.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entity\field.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entity\player.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entity\tetromino.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entity\tetrominofactory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -81,9 +81,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="statemanager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="states\playingstate.cpp">
@@ -113,19 +110,22 @@
     <ClCompile Include="conutils\window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game\field.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\tetromino.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game\tetrominofactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="states\gameoverstate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game\player.cpp">
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entity\field.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entity\player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entity\tetromino.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entity\tetrominofactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

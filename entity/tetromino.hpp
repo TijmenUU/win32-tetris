@@ -4,7 +4,7 @@
 #include <vector>
 #include <Windows.h>
 
-namespace Game
+namespace Entity
 {
 	enum class TetrominoType
 	{

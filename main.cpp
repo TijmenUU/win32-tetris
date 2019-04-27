@@ -1,13 +1,13 @@
 #include <algorithm>
-#include "core.hpp"
+#include "game.hpp"
 #include <thread>
 
 int main()
 {
-	Core core;
+	Game game;
 
 	unsigned const targetFrameTime = 16; // 60 FPS
-	core.Run(targetFrameTime);
+	game.Run(targetFrameTime);
 
 	return 0;
 }

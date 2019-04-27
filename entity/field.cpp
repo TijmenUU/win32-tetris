@@ -5,7 +5,7 @@
 #include <cstdio>
 #include "field.hpp"
 
-namespace Game
+namespace Entity
 {
 	bool Field::IsBlockOutOfBounds(COORD const& block) const
 	{
