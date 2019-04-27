@@ -55,6 +55,15 @@ void PlayingState::DrawGUI() const
 		Cursor::Set({ Config::playingFieldPosition.X + Config::playingFieldSize.X, y });
 		std::cout << borderChar;
 	}
+
+	/* CONTROLS */
+	Color::Set(Color::Color());
+	std::vector<std::string> const controls{ "MOVE:", "W A S D ", "", "ROTATE:", "Q E", "", "MISC:", "P(ause)", "Y N" };
+	for (SHORT y = 0; y < controls.size(); ++y)
+	{
+		Cursor::Set(COORD{ Config::controlsPosition.X, Config::controlsPosition.Y + y });
+		std::cout << controls[y];
+	}
 }
 
 void PlayingState::Update(unsigned const elapsedMs)
