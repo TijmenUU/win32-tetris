@@ -1,12 +1,12 @@
 #include "../config.hpp"
-#include "../eventhandler.hpp"
+#include "../userinput.hpp"
 #include "../statestack.hpp"
 #include "gameoverstate.hpp"
 #include "playingstate.hpp"
 
 void GameOverState::Update(unsigned const elapsedMs)
 {
-	auto& evHandler = EventHandler::GetInstance();
+	auto& evHandler = UserInput::GetInstance();
 
 	if (evHandler.WasActionReleased(PlayerActions::Yes))
 	{

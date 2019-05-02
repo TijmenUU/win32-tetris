@@ -1,11 +1,11 @@
 #include "../config.hpp"
-#include "../eventhandler.hpp"
+#include "../userinput.hpp"
 #include "../statestack.hpp"
 #include "pausestate.hpp"
 
 void PauseState::Update(unsigned const elapsedMs)
 {
-	EventHandler& evHandler = EventHandler::GetInstance();
+	UserInput& evHandler = UserInput::GetInstance();
 	if (evHandler.WasActionReleased(PlayerActions::Pause))
 	{
 		StateStack::GetInstance().PopState();

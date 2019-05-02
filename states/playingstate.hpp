@@ -11,7 +11,7 @@ private:
 
 	void Pause();
 
-	void HandleInput(EventHandler const & evHandler);
+	void HandleInput(UserInput const & evHandler);
 
 	void DrawGUI() const;
 

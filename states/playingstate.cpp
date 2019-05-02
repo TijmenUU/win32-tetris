@@ -13,7 +13,7 @@ void PlayingState::Pause()
 	stateStack.PushState(std::make_unique<PauseState>());
 }
 
-void PlayingState::HandleInput(EventHandler const& evHandler)
+void PlayingState::HandleInput(UserInput const& evHandler)
 {
 	if (evHandler.WasActionReleased(PlayerActions::Pause))
 	{
@@ -68,7 +68,7 @@ void PlayingState::DrawGUI() const
 
 void PlayingState::Update(unsigned const elapsedMs)
 {
-	EventHandler& evHandler = EventHandler::GetInstance();
+	UserInput& evHandler = UserInput::GetInstance();
 	if (evHandler.WasThereAnyAction())
 	{
 		HandleInput(evHandler);

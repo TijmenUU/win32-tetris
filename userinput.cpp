@@ -1,13 +1,13 @@
 #include "conutils/event.hpp"
-#include "eventhandler.hpp"
+#include "userinput.hpp"
 
-void EventHandler::ClearState()
+void UserInput::ClearState()
 {
 	playerActionPresses.clear();
 	playerActionReleases.clear();
 }
 
-void EventHandler::Update()
+void UserInput::Update()
 {
 	unsigned const bufferSize = 64;
 	std::vector<Event::InputEvent> buffer;
@@ -87,12 +87,12 @@ void EventHandler::Update()
 	}
 }
 
-bool EventHandler::WasThereAnyAction() const
+bool UserInput::WasThereAnyAction() const
 {
 	return !(playerActionPresses.empty() && playerActionReleases.empty());
 }
 
-bool EventHandler::WasActionPressed(PlayerActions const action) const
+bool UserInput::WasActionPressed(PlayerActions const action) const
 {
 	if (playerActionPresses.find(action) == playerActionPresses.end())
 	{
@@ -102,7 +102,7 @@ bool EventHandler::WasActionPressed(PlayerActions const action) const
 	return true;
 }
 
-bool EventHandler::WasActionReleased(PlayerActions const action) const
+bool UserInput::WasActionReleased(PlayerActions const action) const
 {
 	if (playerActionReleases.find(action) == playerActionReleases.end())
 	{
@@ -112,8 +112,8 @@ bool EventHandler::WasActionReleased(PlayerActions const action) const
 	return true;
 }
 
-EventHandler & EventHandler::GetInstance()
+UserInput & UserInput::GetInstance()
 {
-	static EventHandler evHandler;
+	static UserInput evHandler;
 	return evHandler;
 }

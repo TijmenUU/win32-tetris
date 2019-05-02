@@ -66,7 +66,7 @@ namespace Entity
 	{
 		assert(currentTetroPtr != nullptr);
 
-		EventHandler const& evHandler = EventHandler::GetInstance();
+		UserInput const& evHandler = UserInput::GetInstance();
 		if (evHandler.WasActionReleased(PlayerActions::RotateLeft))
 		{
 			currentTetroPtr->RotateLeft();

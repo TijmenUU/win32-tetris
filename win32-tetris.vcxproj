@@ -129,7 +129,7 @@
     <ClInclude Include="conutils\coordops.hpp" />
     <ClInclude Include="conutils\cursor.hpp" />
     <ClInclude Include="game.hpp" />
-    <ClInclude Include="eventhandler.hpp" />
+    <ClInclude Include="userinput.hpp" />
     <ClInclude Include="conutils\event.hpp" />
     <ClInclude Include="conutils\window.hpp" />
     <ClInclude Include="entity\player.hpp" />
@@ -151,7 +151,7 @@
     <ClCompile Include="conutils\event.cpp" />
     <ClCompile Include="conutils\window.cpp" />
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="eventhandler.cpp" />
+    <ClCompile Include="userinput.cpp" />
     <ClCompile Include="entity\player.cpp" />
     <ClCompile Include="states\gameoverstate.cpp" />
     <ClCompile Include="entity\field.cpp" />

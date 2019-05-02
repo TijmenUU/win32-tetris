@@ -1,5 +1,5 @@
 #pragma once
-#include "eventhandler.hpp"
+#include "userinput.hpp"
 #include <memory>
 #include "states/basestate.hpp"
 

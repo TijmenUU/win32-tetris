@@ -14,7 +14,7 @@ enum class PlayerActions
 	No
 };
 
-class EventHandler
+class UserInput
 {
 private:
 	std::unordered_set<PlayerActions> playerActionPresses;
@@ -24,14 +24,14 @@ private:
 	void ClearState();
 	void Update();
 
-	EventHandler() = default;
-	~EventHandler() = default;
+	UserInput() = default;
+	~UserInput() = default;
 
 public:
 	bool WasThereAnyAction() const;
 	bool WasActionPressed(PlayerActions const action) const;
 	bool WasActionReleased(PlayerActions const action) const;
 
-	static EventHandler & GetInstance();
+	static UserInput & GetInstance();
 };
 

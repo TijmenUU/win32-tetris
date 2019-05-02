@@ -9,7 +9,7 @@ void Game::Run(unsigned const targetFrameTime)
 	StateStack& stateStack = StateStack::GetInstance();
 	stateStack.PushState(std::make_unique<PlayingState>());
 
-	EventHandler& evHandler = EventHandler::GetInstance();
+	UserInput& evHandler = UserInput::GetInstance();
 	while (stateStack.StateCount())
 	{
 		auto const start = std::chrono::steady_clock::now();
