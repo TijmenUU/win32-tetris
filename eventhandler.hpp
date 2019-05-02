@@ -19,17 +19,15 @@ class EventHandler
 private:
 	std::unordered_set<PlayerActions> playerActionPresses;
 	std::unordered_set<PlayerActions> playerActionReleases;
-	bool didWindowResize;
 
 	friend class Game;
 	void ClearState();
 	void Update();
 
-	EventHandler();
-	~EventHandler();
+	EventHandler() = default;
+	~EventHandler() = default;
 
 public:
-	bool DidWindowResize() const;
 	bool WasThereAnyAction() const;
 	bool WasActionPressed(PlayerActions const action) const;
 	bool WasActionReleased(PlayerActions const action) const;

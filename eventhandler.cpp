@@ -5,7 +5,6 @@ void EventHandler::ClearState()
 {
 	playerActionPresses.clear();
 	playerActionReleases.clear();
-	didWindowResize = false;
 }
 
 void EventHandler::Update()
@@ -82,18 +81,10 @@ void EventHandler::Update()
 				break;
 			}
 			break;
-		case Event::Type::RESIZE:
-			didWindowResize = true;
-			break;
 		default:
 			break;
 		}
 	}
-}
-
-bool EventHandler::DidWindowResize() const
-{
-	return didWindowResize;
 }
 
 bool EventHandler::WasThereAnyAction() const
@@ -125,13 +116,4 @@ EventHandler & EventHandler::GetInstance()
 {
 	static EventHandler evHandler;
 	return evHandler;
-}
-
-EventHandler::EventHandler()
-	: didWindowResize(false)
-{
-}
-
-EventHandler::~EventHandler()
-{
 }
